@@ -41,7 +41,7 @@ class Inventory {
 
   refillAll() {
     this.items.forEach(slot => {
-      if (slot.slotQuantity.length < this.inventorySlotLimit) {
+      while (slot.slotQuantity.length < this.inventorySlotLimit) {
         let snack = new Snack(slot.slotName);
         slot.slotQuantity.push(snack);
       }
@@ -60,7 +60,7 @@ class Inventory {
   }
 
   toString() {
-    return JSON.stringify(this.items);
+    return JSON.stringify(this.items, 0, 2);
   }
 }
 
