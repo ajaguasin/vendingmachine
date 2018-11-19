@@ -6,3 +6,4 @@ The goal is to create a vending machine that can print its inventory, accept coi
 ### npm test
 
 To run the test in the terminal
+![Screenshot](JestScreenShot.png)
