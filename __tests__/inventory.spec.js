@@ -1,4 +1,4 @@
-const Inventory = require("../src/classes/inventory/Inventory");
+import Inventory from "../src/classes/inventory/Inventory";
 
 describe("Inventory", () => {
   let InventoryTest;

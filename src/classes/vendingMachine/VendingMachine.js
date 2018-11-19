@@ -1,4 +1,4 @@
-const Inventory = require("../inventory/Inventory");
+import Inventory from "../inventory/Inventory";
 const MONEY_VALUES = {
   toonie: 200,
   loonie: 100,
@@ -66,6 +66,8 @@ class VendingMachine {
       case "nickel":
         this.vendingRegister.customerInput["nickel"]++;
         break;
+      default:
+        break;
     }
 
     return this.countCustomerTotal();
@@ -85,6 +87,18 @@ class VendingMachine {
 
   checkPrice(gridInput) {
     return this.inventory.checkPrice(gridInput);
+  }
+
+  resupplyChange() {
+    let startingBalance = this.vendingRegister.startingBalance;
+    for (const coin in startingBalance) {
+      if (startingBalance.hasOwnProperty(coin)) {
+        if (startingBalance[coin] < 1000) {
+          startingBalance[coin] += 1000;
+        }
+      }
+    }
+    return JSON.stringify(startingBalance, 0, 2);
   }
 
   getChange() {
@@ -125,4 +139,4 @@ class VendingMachine {
   }
 }
 
-module.exports = VendingMachine;
+export default VendingMachine;

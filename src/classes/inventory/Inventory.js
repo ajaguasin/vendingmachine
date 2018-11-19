@@ -1,4 +1,4 @@
-const Snack = require("../snack/Snack");
+import Snack from "../snack/Snack";
 
 class Inventory {
   constructor() {
@@ -79,4 +79,4 @@ class Inventory {
   }
 }
 
-module.exports = Inventory;
+export default Inventory;

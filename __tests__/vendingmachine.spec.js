@@ -1,5 +1,5 @@
-const VendingMachine = require("../src/classes/vendingMachine/VendingMachine");
-const Inventory = require("../src/classes/inventory/Inventory");
+import VendingMachine from "../src/classes/vendingMachine/VendingMachine";
+import Inventory from "../src/classes/inventory/Inventory";
 
 describe("VendingMachine", () => {
   let VendingMachineTest;
@@ -53,6 +53,12 @@ describe("VendingMachine", () => {
       expect(VendingMachineTest.inputMoney("toonie")).toEqual(200); // cents
       expect(VendingMachineTest.inputMoney("toonie")).toEqual(400);
       expect(VendingMachineTest.inputMoney("loonie")).toEqual(500);
+    });
+  });
+
+  describe(".resupplyChange()", () => {
+    it("should add 1000 cents worth to any coin in the startingBalance that falls below 1000. Print the startingBalance", () => {
+      expect(VendingMachineTest.resupplyChange()).toBeDefined();
     });
   });
 });

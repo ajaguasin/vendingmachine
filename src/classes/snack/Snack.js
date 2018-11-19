@@ -8,4 +8,4 @@ class Snack {
   }
 }
 
-module.exports = Snack;
+export default Snack;
