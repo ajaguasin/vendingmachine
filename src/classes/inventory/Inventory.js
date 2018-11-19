@@ -67,6 +67,13 @@ class Inventory {
     return snack.price;
   }
 
+  checkQuantity(gridInput) {
+    let snack = this.items.find(slot => {
+      return slot.gridCoord === gridInput;
+    });
+    return snack.slotQuantity.length;
+  }
+
   toString() {
     return JSON.stringify(this.items, 0, 2);
   }

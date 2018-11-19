@@ -36,6 +36,18 @@ describe("Inventory", () => {
     });
   });
 
+  describe(".checkQuantity()", () => {
+    beforeEach(() => {
+      InventoryTest.dispenseSnack("A1");
+      InventoryTest.dispenseSnack("A1");
+      InventoryTest.dispenseSnack("A1");
+    });
+
+    it("should return the length (quantity) of the product with the given input", () => {
+      expect(InventoryTest.checkQuantity("A1")).toBe(0);
+    });
+  });
+
   describe("When some snacks in the inventory is partially full", () => {
     beforeEach(() => {
       InventoryTest.dispenseSnack("A1");

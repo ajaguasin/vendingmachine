@@ -40,6 +40,8 @@ class VendingMachine {
   dispenseSnack(gridInput) {
     if (this.countCustomerTotal() < this.checkPrice(gridInput)) {
       console.log("Insufficient Funds");
+    } else if (this.inventory.checkQuantity(gridInput) < 0) {
+      console.log("Out of stock");
     } else {
       this.vendingRegister.changeDue =
         this.countCustomerTotal() - this.checkPrice(gridInput);

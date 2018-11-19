@@ -45,7 +45,6 @@ describe("VendingMachine", () => {
 
     it("should return the value of the currentInput", () => {
       expect(VendingMachineTest.getChange()).toEqual(290);
-      console.log(VendingMachineTest.vendingRegister);
     });
   });
 
