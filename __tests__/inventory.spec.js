@@ -19,6 +19,12 @@ describe("Inventory", () => {
     });
   });
 
+  describe(".checkPrice()", () => {
+    it("should return a number representing the price of the Snack", () => {
+      expect(InventoryTest.checkPrice("A1")).toBe(2.5);
+    });
+  });
+
   describe(".dispenseSnack()", () => {
     it("should 'dispense' a snack object from the vending machine inventory from the given input and have 1 less element in the array", () => {
       expect(InventoryTest.dispenseSnack("A1")).toMatchObject({

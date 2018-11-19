@@ -28,7 +28,8 @@ class Inventory {
       slot = {
         slotName: this.snackChoices[index].name,
         slotQuantity: [],
-        gridCoord: this.snackChoices[index].gridCoord
+        gridCoord: this.snackChoices[index].gridCoord,
+        price: this.snackChoices[index].price
       };
       for (let j = 0; j < this.inventorySlotLimit; j++) {
         let snack = new Snack(this.snackChoices[index].name);
@@ -57,6 +58,13 @@ class Inventory {
 
     let result = snack.slotQuantity.pop();
     return result;
+  }
+
+  checkPrice(gridInput) {
+    let snack = this.items.find(slot => {
+      return slot.gridCoord === gridInput;
+    });
+    return snack.price;
   }
 
   toString() {
