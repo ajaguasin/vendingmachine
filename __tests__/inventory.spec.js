@@ -21,7 +21,7 @@ describe("Inventory", () => {
 
   describe(".checkPrice()", () => {
     it("should return a number representing the price of the Snack", () => {
-      expect(InventoryTest.checkPrice("A1")).toBe(2.5);
+      expect(InventoryTest.checkPrice("A1")).toBe(250); // cents
     });
   });
 

@@ -5,15 +5,15 @@ class Inventory {
     this.inventorySlotLimit = 3;
     this.inventoryGridLimit = 9;
     this.snackChoices = [
-      { name: "Cheetos", price: 2.5, gridCoord: "A1" },
-      { name: "Doritos", price: 2.5, gridCoord: "A2" },
-      { name: "Lays", price: 2.5, gridCoord: "A3" },
-      { name: "Peanuts", price: 2, gridCoord: "B1" },
-      { name: "Granola", price: 2, gridCoord: "B2" },
-      { name: "Oreos", price: 2, gridCoord: "B3" },
-      { name: "Gum", price: 1.5, gridCoord: "C1" },
-      { name: "Mint", price: 1.5, gridCoord: "C2" },
-      { name: "Lozenge", price: 1.5, gridCoord: "C3" }
+      { name: "Cheetos", price: 250, gridCoord: "A1" },
+      { name: "Doritos", price: 250, gridCoord: "A2" },
+      { name: "Lays", price: 250, gridCoord: "A3" },
+      { name: "Peanuts", price: 200, gridCoord: "B1" },
+      { name: "Granola", price: 200, gridCoord: "B2" },
+      { name: "Oreos", price: 200, gridCoord: "B3" },
+      { name: "Gum", price: 150, gridCoord: "C1" },
+      { name: "Mint", price: 150, gridCoord: "C2" },
+      { name: "Lozenge", price: 150, gridCoord: "C3" }
     ];
     this.items = this.createItems();
   }
