@@ -1,0 +1,46 @@
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.vendingMachine {
+  border: 1px solid blue;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.slot {
+  box-sizing: border-box;
+  border: 1px solid yellow;
+  min-width: 200px;
+  min-height: 100px;
+  flex: 0 0 33.3333%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  padding: 1rem;
+}
+
+.screen {
+  min-width: 100px;
+  min-height: 100px;
+  border: 1px solid red;
+}
+
+.controls {
+  display: flex;
+}
+
+.moneyButtons {
+  display: flex;
+}
+.moneyButtons button {
+  flex: 33.3333%;
+
+  padding: 0.5rem;
+}
