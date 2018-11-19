@@ -36,11 +36,16 @@ describe("VendingMachine", () => {
       VendingMachineTest.inputMoney("toonie");
       VendingMachineTest.inputMoney("toonie");
       VendingMachineTest.inputMoney("loonie");
-      VendingMachineTest.dispenseSnack("A1");
+      VendingMachineTest.inputMoney("quarter");
+      VendingMachineTest.inputMoney("dime");
+      VendingMachineTest.inputMoney("nickel"); // 540 total
+      VendingMachineTest.dispenseSnack("A1"); // - 250
+      //change due: 290
     });
 
     it("should return the value of the currentInput", () => {
-      expect(VendingMachineTest.getChange()).toEqual(250);
+      expect(VendingMachineTest.getChange()).toEqual(290);
+      console.log(VendingMachineTest.vendingRegister);
     });
   });
 

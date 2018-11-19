@@ -3,7 +3,7 @@ const MONEY_VALUES = {
   toonie: 200,
   loonie: 100,
   quarter: 25,
-  dime: 1,
+  dime: 10,
   nickel: 5
 };
 class VendingMachine {
@@ -108,10 +108,18 @@ class VendingMachine {
           this.vendingRegister.changeDue -=
             Math.floor(this.vendingRegister.changeDue / MONEY_VALUES[coin]) *
             MONEY_VALUES[coin];
+          startingBalance[coin] -= customerInput[coin] * MONEY_VALUES[coin];
         }
       }
     }
-    return this.countCustomerTotal();
+    let result = this.countCustomerTotal();
+    this.vendingRegister.customerTotal = 0;
+    for (const coin in customerInput) {
+      if (customerInput.hasOwnProperty(coin)) {
+        customerInput[coin] = 0;
+      }
+    }
+    return result;
   }
 }
 
