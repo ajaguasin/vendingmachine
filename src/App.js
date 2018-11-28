@@ -2,64 +2,69 @@ import React, { Component } from "react";
 import "./App.css";
 import VendingMachine from "./classes/vendingMachine/VendingMachine.js";
 import Slot from "./components/Slot";
+import { FaBeer } from "react-icons/fa";
 
 class App extends Component {
   constructor() {
     super();
     this.VendingMachine = new VendingMachine();
     this.state = {
-      ...this.VendingMachine
+      register: this.VendingMachine.vendingRegister,
+      inventoryOutput: ""
     };
   }
   render() {
+    const register = this.VendingMachine.vendingRegister;
     console.log(this.state);
     return (
       <div className="app">
-        <h1>Vending Machine</h1>
         <div className="vendingMachine">
-          {this.state.inventory.items.map((item, index) => {
+          {this.VendingMachine.inventory.items.map((item, index) => {
             return (
               <Slot
                 key={index}
-                slotName={item.slotName}
-                slotQuantity={item.slotQuantity}
-                gridCoord={item.gridCoord}
-                price={item.price}
+                item={item}
+                dispenseSnack={() => this.VendingMachine.dispenseSnack}
               />
             );
           })}
         </div>
+
         <div className="controls">
           <div className="moneyButtons">
-            <button
-              onClick={() => {
-                this.VendingMachine.inputMoney("toonie");
-              }}
-            >
-              Input $2
-            </button>
-            <button
-              onClick={() => {
-                this.VendingMachine.inputMoney("loonie");
-                console.log(this.state);
-              }}
-            >
-              Input $1
-            </button>
-            <button>Input $0.25</button>
-            <button>Input $0.10</button>
-            <button>Input $0.05</button>
+            {Object.entries(register.customerInput).map((el, index) => {
+              return (
+                <button
+                  key={index}
+                  onClick={() => {
+                    this.VendingMachine.inputMoney(el[0]);
+                    this.setState({
+                      register: this.state.register
+                    });
+                  }}
+                >{`Input ${el[0]}`}</button>
+              );
+            })}
           </div>
-
-          <button>Input Code</button>
-          <button>Get Change</button>
-          <button>Show Inventory</button>
+          <div>
+            <button>Input Code</button>
+            <button>Get Change</button>
+            <button
+              onClick={() => {
+                this.setState({
+                  inventoryOutput: this.VendingMachine.printInventory()
+                });
+              }}
+            >
+              Show Inventory
+            </button>
+          </div>
           <div className="screen">
             <p className="moneyInput">
-              {this.state.vendingRegister.customerTotal}
+              {`You've inputted: $${this.state.register.customerTotal / 100}`}
             </p>
             <p className="change" />
-            <p className="inventory" />
+            <p className="inventory">{this.state.inventoryOutput}</p>
           </div>
         </div>
       </div>

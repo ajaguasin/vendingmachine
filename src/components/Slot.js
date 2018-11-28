@@ -1,13 +1,19 @@
 import React from "react";
 
-const Slot = ({ slotName, slotQuantity, gridCoord, price }) => {
+const Slot = ({ item, dispenseSnack }) => {
   return (
     <div className="slot">
       <div>
-        {slotName}: ${price / 100}
+        {item.slotName}: ${item.price / 100}
       </div>
-      <div>Quantity: {slotQuantity.length}</div>
-      <button>{gridCoord}</button>
+      <div>Quantity: {item.slotQuantity.length}</div>
+      <button
+        onClick={() => {
+          dispenseSnack(item.gridInput);
+        }}
+      >
+        {item.gridCoord}
+      </button>
     </div>
   );
 };
