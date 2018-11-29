@@ -40,7 +40,9 @@ class App extends Component {
               <Slot
                 key={index}
                 item={item}
-                dispenseSnack={() => this.VendingMachine.dispenseSnack}
+                setGridInput={() => this.VendingMachine.setGridInput()}
+                dispenseSnack={item => this.VendingMachine.dispenseSnack(item)}
+                formatInventoryOutput={() => this.formatInventoryOutput()}
               />
             );
           })}

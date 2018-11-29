@@ -25,8 +25,13 @@ class VendingMachine {
         nickel: 0
       },
       customerTotal: 0,
-      changeDue: 0
+      changeDue: 0,
+      gridInput: ""
     };
+  }
+
+  setGridInput(gridInput) {
+    this.gridInput = gridInput;
   }
 
   printInventory() {
@@ -37,7 +42,8 @@ class VendingMachine {
     return this.inventory.refillAll();
   }
 
-  dispenseSnack(gridInput) {
+  dispenseSnack = gridInput => {
+    console.log(gridInput);
     if (this.countCustomerTotal() < this.checkPrice(gridInput)) {
       console.log("Insufficient Funds");
     } else if (this.inventory.checkQuantity(gridInput) < 0) {
@@ -47,7 +53,7 @@ class VendingMachine {
         this.countCustomerTotal() - this.checkPrice(gridInput);
       return this.inventory.dispenseSnack(gridInput);
     }
-  }
+  };
 
   inputMoney(money) {
     switch (money) {

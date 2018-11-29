@@ -64,6 +64,7 @@ class Inventory {
     let snack = this.items.find(slot => {
       return slot.gridCoord === gridInput;
     });
+    console.log(snack);
     return snack.price;
   }
 

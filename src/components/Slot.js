@@ -5,7 +5,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 
-const Slot = ({ item, dispenseSnack }) => {
+const Slot = ({ item, dispenseSnack, formatInventoryOutput, setGridInput }) => {
   return (
     <Grid item={true} xs={4} md={4} lg={4}>
       <Card className="slot">
@@ -18,7 +18,9 @@ const Slot = ({ item, dispenseSnack }) => {
             variant="contained"
             color="primary"
             onClick={() => {
-              dispenseSnack(item.gridInput);
+              // console.log(dispenseSnack);
+              dispenseSnack(item.gridCoord);
+              formatInventoryOutput();
             }}
           >
             {item.gridCoord}
