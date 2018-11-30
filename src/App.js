@@ -30,13 +30,13 @@ class App extends Component {
   };
   render() {
     const register = this.VendingMachine.vendingRegister;
-    console.log(this.state);
     return (
       <div className="app">
         <Grid className="vendingMachine" container={true} direction={"row"}>
           {this.VendingMachine.inventory.items.map((item, index) => {
             return (
               <Slot
+                changeDue={register.changeDue}
                 key={index}
                 item={item}
                 setGridInput={() => this.VendingMachine.setGridInput()}
@@ -55,6 +55,7 @@ class App extends Component {
                   key={index}
                   variant="contained"
                   color="default"
+                  disabled={register.changeDue > 0}
                   onClick={() => {
                     this.VendingMachine.inputMoney(el[0]);
                     this.setState({
@@ -66,7 +67,15 @@ class App extends Component {
             })}
           </div>
           <Grid item={true}>
-            <Button variant="contained" color="default">
+            <Button
+              variant="contained"
+              color="default"
+              disabled={register.changeDue > 0}
+              onClick={() => {
+                this.VendingMachine.refillAll();
+                this.setState({ ...this.state });
+              }}
+            >
               Refill Inventory
             </Button>
 
@@ -85,9 +94,9 @@ class App extends Component {
               {`You've inputted: $${this.state.register.customerTotal / 100}`}
             </p>
             <p className="change">{`Change: $${register.changeDue / 100}`} </p>
-            <p className="coinChange">{`Change coin results: ${
-              this.VendingMachine.vendingRegister.changeresults
-            }`}</p>
+            <p className="coinChange">{`Change coin results: ${Object.entries(
+              register.changeresults.coinQuantity
+            )}`}</p>
             <p className="msg">{this.VendingMachine.message}</p>
           </Grid>
         </Grid>

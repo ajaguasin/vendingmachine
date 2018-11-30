@@ -24,7 +24,10 @@ class VendingMachine {
         dime: 0,
         nickel: 0
       },
-      changeresults: "",
+      changeresults: {
+        changeBack: 0,
+        coinQuantity: {}
+      },
       customerTotal: 0,
       changeDue: 0,
       gridInput: "",
@@ -110,6 +113,17 @@ class VendingMachine {
   }
 
   getChange() {
+    let obj = {
+      changeBack: 0,
+      coinQuantity: {
+        toonie: 0,
+        loonie: 0,
+        quarter: 0,
+        dime: 0,
+        nickel: 0
+      }
+    };
+
     // add customer's input to the vending machine's change balance
     let startingBalance = this.vendingRegister.startingBalance;
     let customerInput = this.vendingRegister.customerInput;
@@ -126,6 +140,10 @@ class VendingMachine {
         while (
           Math.floor(this.vendingRegister.changeDue / MONEY_VALUES[coin]) >= 1
         ) {
+          obj.coinQuantity[coin] += Math.floor(
+            this.vendingRegister.changeDue / MONEY_VALUES[coin]
+          );
+
           customerInput[coin] += Math.floor(
             this.vendingRegister.changeDue / MONEY_VALUES[coin]
           );
@@ -136,10 +154,7 @@ class VendingMachine {
         }
       }
     }
-    let obj = {
-      changeBack: 0,
-      coinQuantity: this.customerInput
-    };
+
     let result = this.countCustomerTotal();
     this.vendingRegister.customerTotal = 0;
     for (const coin in customerInput) {
@@ -148,8 +163,8 @@ class VendingMachine {
       }
     }
 
-    obj.coinQuantity = result;
-    this.changeresults = obj;
+    obj.changeBack = result;
+    this.vendingRegister.changeresults = obj;
     return result;
   }
 }
