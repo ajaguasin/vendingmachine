@@ -11,8 +11,13 @@ class App extends Component {
     this.VendingMachine = new VendingMachine();
     this.state = {
       register: this.VendingMachine.vendingRegister,
-      inventoryOutput: this.formatInventoryOutput()
+      inventoryOutput: {},
+      coinChange: this.VendingMachine.vendingRegister.changeresults
     };
+  }
+
+  componentDidMount() {
+    this.formatInventoryOutput();
   }
 
   formatInventoryOutput = () => {
@@ -21,20 +26,14 @@ class App extends Component {
     JSON.parse(this.VendingMachine.printInventory()).map(e => {
       obj[`${e.slotName}`] = e.slotQuantity.length;
     });
-
-    return obj;
+    this.setState({ inventoryOutput: obj });
   };
   render() {
     const register = this.VendingMachine.vendingRegister;
     console.log(this.state);
     return (
       <div className="app">
-        <Grid
-          className="vendingMachine"
-          container={true}
-          direction={"row"}
-          // wrap={"wrap"}
-        >
+        <Grid className="vendingMachine" container={true} direction={"row"}>
           {this.VendingMachine.inventory.items.map((item, index) => {
             return (
               <Slot
@@ -71,7 +70,13 @@ class App extends Component {
               Refill Inventory
             </Button>
 
-            <Button variant="contained" color="default">
+            <Button
+              variant="contained"
+              color="default"
+              onClick={() => {
+                this.setState({ coinChange: this.VendingMachine.getChange() });
+              }}
+            >
               Get Change
             </Button>
           </Grid>
@@ -79,8 +84,11 @@ class App extends Component {
             <p className="moneyInput">
               {`You've inputted: $${this.state.register.customerTotal / 100}`}
             </p>
-            <p className="change" />
-            <p>{this.state.inventoryOutput["Cheetos"]}</p>
+            <p className="change">{`Change: $${register.changeDue / 100}`} </p>
+            <p className="coinChange">{`Change coin results: ${
+              this.VendingMachine.vendingRegister.changeresults
+            }`}</p>
+            <p className="msg">{this.VendingMachine.message}</p>
           </Grid>
         </Grid>
       </div>

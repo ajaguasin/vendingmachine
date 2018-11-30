@@ -24,9 +24,11 @@ class VendingMachine {
         dime: 0,
         nickel: 0
       },
+      changeresults: "",
       customerTotal: 0,
       changeDue: 0,
-      gridInput: ""
+      gridInput: "",
+      message: ""
     };
   }
 
@@ -42,18 +44,18 @@ class VendingMachine {
     return this.inventory.refillAll();
   }
 
-  dispenseSnack = gridInput => {
-    console.log(gridInput);
+  dispenseSnack(gridInput) {
     if (this.countCustomerTotal() < this.checkPrice(gridInput)) {
-      console.log("Insufficient Funds");
+      this.message = "Insufficient Funds";
     } else if (this.inventory.checkQuantity(gridInput) < 0) {
-      console.log("Out of stock");
+      this.message = "Out of stock";
     } else {
       this.vendingRegister.changeDue =
         this.countCustomerTotal() - this.checkPrice(gridInput);
+
       return this.inventory.dispenseSnack(gridInput);
     }
-  };
+  }
 
   inputMoney(money) {
     switch (money) {
@@ -134,6 +136,10 @@ class VendingMachine {
         }
       }
     }
+    let obj = {
+      changeBack: 0,
+      coinQuantity: this.customerInput
+    };
     let result = this.countCustomerTotal();
     this.vendingRegister.customerTotal = 0;
     for (const coin in customerInput) {
@@ -141,6 +147,9 @@ class VendingMachine {
         customerInput[coin] = 0;
       }
     }
+
+    obj.coinQuantity = result;
+    this.changeresults = obj;
     return result;
   }
 }
