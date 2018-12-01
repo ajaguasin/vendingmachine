@@ -4,17 +4,31 @@ import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
+import IconItems from "./IconItems";
 
 const Slot = ({ item, dispenseSnack, formatInventoryOutput, changeDue }) => {
   return (
-    <Grid item={true} xs={4} md={4} lg={4}>
+    <Grid
+      item={true}
+      xs={4}
+      md={4}
+      lg={4}
+      style={{ backgroundColor: "rgb(44, 45, 47)" }}
+    >
       <Card className="slot">
-        <CardContent>
-          <Typography>
+        <CardContent className="cardContent">
+          <Typography variant="title" color="secondary">
             {item.slotName}: ${item.price / 100}
           </Typography>
-          <Typography>Quantity: {item.slotQuantity.length}</Typography>
+          <Typography
+            variant="subheading"
+            className="subHeading"
+            color="secondary"
+          >
+            Quantity: {item.slotQuantity.length}
+          </Typography>
           <Button
+            className="slotButton"
             variant="contained"
             color="primary"
             disabled={changeDue > 0}
@@ -25,6 +39,9 @@ const Slot = ({ item, dispenseSnack, formatInventoryOutput, changeDue }) => {
           >
             {item.gridCoord}
           </Button>
+        </CardContent>
+        <CardContent className="cardIcon">
+          <IconItems slotQuantity={item.slotQuantity} />
         </CardContent>
       </Card>
     </Grid>

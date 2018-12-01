@@ -47,59 +47,73 @@ class App extends Component {
           })}
         </Grid>
 
-        <Grid container={true} className="controls">
-          <div className="moneyButtons">
-            {Object.entries(register.customerInput).map((el, index) => {
-              return (
-                <Button
-                  key={index}
-                  variant="contained"
-                  color="default"
-                  disabled={register.changeDue > 0}
-                  onClick={() => {
-                    this.VendingMachine.inputMoney(el[0]);
-                    this.setState({
-                      register: this.state.register
-                    });
-                  }}
-                >{`Input ${el[0]}`}</Button>
-              );
-            })}
-          </div>
-          <Grid item={true}>
-            <Button
-              variant="contained"
-              color="default"
-              disabled={register.changeDue > 0}
-              onClick={() => {
-                this.VendingMachine.refillAll();
-                this.setState({ ...this.state });
-              }}
-            >
-              Refill Inventory
-            </Button>
+        <div className="controls">
+          <Grid
+            container={true}
+            direction="column"
+            justify="space-around"
+            className="controlGridCont"
+          >
+            <Grid className="moneyButtons" item={true}>
+              {Object.entries(register.customerInput).map((el, index) => {
+                return (
+                  <Button
+                    key={index}
+                    style={{ margin: 10 }}
+                    variant="contained"
+                    color="primary"
+                    disabled={register.changeDue > 0}
+                    onClick={() => {
+                      this.VendingMachine.inputMoney(el[0]);
+                      this.setState({
+                        register: this.state.register
+                      });
+                    }}
+                  >{`Input ${el[0]}`}</Button>
+                );
+              })}
+            </Grid>
+            <Grid item={true} className="controlGridItem">
+              <Button
+                className="grid2Buttons"
+                variant="contained"
+                color="primary"
+                disabled={register.changeDue > 0}
+                onClick={() => {
+                  this.VendingMachine.refillAll();
+                  this.setState({ ...this.state });
+                }}
+              >
+                Refill Inventory
+              </Button>
 
-            <Button
-              variant="contained"
-              color="default"
-              onClick={() => {
-                this.setState({ coinChange: this.VendingMachine.getChange() });
-              }}
-            >
-              Get Change
-            </Button>
+              <Button
+                className="grid2Buttons"
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  this.setState({
+                    coinChange: this.VendingMachine.getChange()
+                  });
+                }}
+              >
+                Get Change
+              </Button>
+            </Grid>
+            <Grid item={true} xs={12} md={12} lg={12} className="screen">
+              <p className="moneyInput">
+                {`You've inputted: $${this.state.register.customerTotal / 100}`}
+              </p>
+              <p className="change">
+                {`Change: $${register.changeDue / 100}`}{" "}
+              </p>
+              <p className="coinChange">{`Change coin results: ${Object.entries(
+                register.changeresults.coinQuantity
+              )}`}</p>
+              <p className="msg">{this.VendingMachine.message}</p>
+            </Grid>
           </Grid>
-          <Grid item={true} xs={12} md={12} lg={12} className="screen">
-            <p className="moneyInput">
-              {`You've inputted: $${this.state.register.customerTotal / 100}`}
-            </p>
-            <p className="change">{`Change: $${register.changeDue / 100}`} </p>
-            <p className="coinChange">{`Change coin results: ${Object.entries(
-              register.changeresults.coinQuantity
-            )}`}</p>
-            <p className="msg">{this.VendingMachine.message}</p>
-          </Grid>
-        </Grid>
+        </div>
       </div>
     );
   }
