@@ -51,8 +51,8 @@ button {
   min-height: 100px;
 
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
   flex-wrap: nowrap;
   border-top: 10px solid black;
@@ -123,5 +123,5 @@ button span {
 .fade-leave.fade-leave-active {
   transform: translateY(100px);
   opacity: 0.01;
-  transition: transform 300ms ease-in, opacity 300ms ease-in;
+  transition: transform 600ms ease-in, opacity 600ms ease-in;
 }

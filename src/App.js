@@ -5,6 +5,7 @@ import Slot from "./components/Slot";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { Typography } from "@material-ui/core";
+import IconItems from "./components/IconItems";
 
 class App extends Component {
   constructor() {
@@ -131,17 +132,22 @@ class App extends Component {
               </Grid>
 
               <Grid item={true} xs={12} md={12} lg={12} className="screen">
-                <p className="moneyInput">
-                  {`You've inputted: $${this.state.register.customerTotal /
-                    100}`}
-                </p>
-                <p className="change">
-                  {`Change due: $${register.changeDue / 100}`}{" "}
-                </p>
-                <p className="coinChange">{`You got back: ${Object.entries(
-                  register.changeresults.coinQuantity
-                )}`}</p>
-                <p className="msg">{this.VendingMachine.message}</p>
+                <div>
+                  <p className="moneyInput">
+                    {`You've inputted: $${this.state.register.customerTotal /
+                      100}`}
+                  </p>
+                  <p className="change">
+                    {`Change due: $${register.changeDue / 100}`}{" "}
+                  </p>
+                  <p className="coinChange">{`You got back: ${Object.entries(
+                    register.changeresults.coinQuantity
+                  )}`}</p>
+                  <p className="msg">{this.VendingMachine.message}</p>
+                </div>
+                <div className="output">
+                  {register.changeDue > 0 && <IconItems slotQuantity={[1]} />}
+                </div>
               </Grid>
             </Grid>
           </div>
